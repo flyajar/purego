@@ -12,26 +12,32 @@ class DonationController extends Controller
     {
         $data = $request->validated();
 
-        $source = Paymongo::source()->create([
-            'type' => 'gcash',
-            'amount' => $data['amount'],
-            'currency' => 'PHP',
-            'redirect' => [
-                'success' => config('app.url') . 'success',
-                'failed' => config('app.url') . 'failed'
-            ],
-            'billing' => [
-                'email' => 'donations@purego.com',
-                'name' => 'purego'
-            ]
-        ]);
+        try {
+            $source = Paymongo::source()->create([
+                'type' => 'gcash',
+                'amount' => $data['amount'],
+                'currency' => 'PHP',
+                'redirect' => [
+                    'success' => config('app.url') . 'success',
+                    'failed' => config('app.url') . 'failed'
+                ],
+                'billing' => [
+                    'email' => 'donations@purego.com',
+                    'name' => 'purego'
+                ]
+            ]);
+            $redirectUrl = $source->getRedirect()['checkout_url'];
 
-//        Donation::query()->create([
-//            'source_id' => $source->id,
-//            'type' => 'gcash',
-//            'amount' => $data['amount']
-//        ]);
+//            Donation::query()->create([
+//                'source_id' => $source->id,
+//                'type' => 'gcash',
+//                'amount' => $data['amount']
+//            ]);
 
-        return redirect($source->getRedirect()['checkout_url']);
+        }catch (\Exception $exception) {
+            toast('There\'s a problem with your donation. Please try again later','error');
+        } finally {
+            return is_null($redirectUrl) ? redirect()->back() : redirect($source->getRedirect()['checkout_url']);
+        }
     }
 }
