@@ -11,7 +11,7 @@ class DonationController extends Controller
     public function store(DonationRequest $request)
     {
         $data = $request->validated();
-
+        $redirectUrl = null;
         try {
             $source = Paymongo::source()->create([
                 'type' => 'gcash',
