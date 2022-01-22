@@ -26,11 +26,11 @@ class DonationController extends Controller
             ]
         ]);
 
-        Donation::query()->create([
-            'source_id' => $source->id,
-            'type' => 'gcash',
-            'amount' => $data['amount']
-        ]);
+//        Donation::query()->create([
+//            'source_id' => $source->id,
+//            'type' => 'gcash',
+//            'amount' => $data['amount']
+//        ]);
 
         return redirect($source->getRedirect()['checkout_url']);
     }
