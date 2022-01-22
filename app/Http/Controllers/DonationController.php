@@ -17,8 +17,8 @@ class DonationController extends Controller
             'amount' => $data['amount'],
             'currency' => 'PHP',
             'redirect' => [
-                'success' => config('app.url') . '/success',
-                'failed' => config('app.url') . '/failed'
+                'success' => config('app.url') . 'success',
+                'failed' => config('app.url') . 'failed'
             ],
             'billing' => [
                 'email' => 'donations@purego.com',
