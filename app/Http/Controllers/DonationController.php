@@ -21,8 +21,8 @@ class DonationController extends Controller
                 'failed' => config('app.url') . '/failed'
             ],
             'billing' => [
-                'email' => 'donations@aigo.com',
-                'name' => 'aigo'
+                'email' => 'donations@purego.com',
+                'name' => 'purego'
             ]
         ]);
 

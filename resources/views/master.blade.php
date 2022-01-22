@@ -19,6 +19,7 @@
 </head>
 <body class="antialiased">
     <div id="app">
+        @include('sweetalert::alert')
         @yield('content')
     </div>
 </body>
