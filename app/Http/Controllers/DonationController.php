@@ -25,11 +25,13 @@ class DonationController extends Controller
                     'name' => 'purego'
                 ]
             ]);
-//            Donation::query()->create([
-//                'source_id' => $source->id,
-//                'type' => 'gcash',
-//                'amount' => $data['amount']
-//            ]);
+           $donation =  Donation::query()->create([
+                'source_id' => $source->id,
+                'type' => 'gcash',
+                'amount' => $data['amount']
+            ]);
+
+           $donation->setStatus('pending');
 
             return redirect($source->getRedirect()['checkout_url']);
         }catch (\Exception $exception) {

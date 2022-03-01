@@ -17,6 +17,7 @@ class CreateDonationsTable extends Migration
             $table->id();
             $table->decimal('amount', '10');
             $table->string('source_id')->nullable();
+            $table->string('payment_id')->nullable();
             $table->string('type');
             $table->timestamps();
         });

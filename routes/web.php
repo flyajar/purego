@@ -20,7 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('/success', function () {
-    toast('We\'ve received your donation. Thank you for helping us reach our goals','success');
+    toast('We\'re processing your donation. Thank you for helping us reach our goals','success');
 
     return redirect('/');
 });
