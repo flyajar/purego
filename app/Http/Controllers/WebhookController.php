@@ -13,7 +13,7 @@ class WebhookController extends Controller
     public function charge(Request $request)
     {
         $data = Arr::get($request->all(), 'data.attributes');
-
+        Log::info([$data]);
         if ($data['type'] !== 'source.chargeable') {
             return response('Unknown type', 422);
         }
