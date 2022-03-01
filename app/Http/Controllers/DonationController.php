@@ -25,15 +25,13 @@ class DonationController extends Controller
                     'name' => 'purego'
                 ]
             ]);
-           $donation =  Donation::query()->create([
+           Donation::query()->create([
                 'source_id' => $source->id,
                 'type' => 'gcash',
                 'amount' => $data['amount']
             ]);
 
-           $donation->setStatus('pending');
-
-            return redirect($source->getRedirect()['checkout_url']);
+           return redirect($source->getRedirect()['checkout_url']);
         }catch (\Exception $exception) {
             toast('There\'s a problem with your donation. Please try again later','error');
             return redirect('/');
