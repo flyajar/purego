@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Donation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 use Luigel\Paymongo\Facades\Paymongo;
 
 class WebhookController extends Controller
@@ -19,7 +20,8 @@ class WebhookController extends Controller
 
         $source = Arr::get($data, 'data');
         $sourceData = $source['attributes'];
-
+        Log::info([$source]);
+        Log::info([$sourceData]);
         $donation = Donation::where('source_id',  $source['id'])->firstOrFail();
 
         if ((float) $sourceData['amount']/100 !== (float) $donation->total || $sourceData['currency'] !== 'PHP') {
